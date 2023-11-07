@@ -8,6 +8,8 @@ app.use(express.static("../frontend/js"));
 
 app.use(json());
 
+// improved spawn algorithm
+
 app.listen(3000, () => console.log("http://localhost:3000"));
 
 app.get("/users/:username/:password", (req, res) => {
