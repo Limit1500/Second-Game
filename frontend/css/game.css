@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;1,100&display=swap');
+
+* {
+  margin: 0px;
+  padding: 0px;
+  font-family: "Roboto";
+  color: white;
+}
+
+canvas {
+  background-image: url(../images/game_background.png);
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+canvas {
+  display: block;
+}

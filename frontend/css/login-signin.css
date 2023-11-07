@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;1,100&display=swap');
+
+* {
+  margin: 0px;
+  padding: 0px;
+  font-family: "Roboto";
+  color: white;
+}
+
+:root {
+  background-image: url(../images/game_background.png);
+}
+
+.profile_img {
+  border-radius: 50%;
+  border: 3px solid black;
+  margin-top: 30px;
+  margin-bottom: 100px;
+  width: 25%;
+}
+
+.div_principal {
+  margin-left: 30%;
+  margin-right: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-image: url(../images/login-signin_background.jpeg);
+  width: 40%;
+  border-radius: 20%;
+  border: 3px solid black;
+  margin-top: 5rem;
+  margin-bottom: 10rem;
+}
+
+.small_div {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 2rem;
+  border-bottom: 3px solid black;
+  width: 80%;
+  margin-bottom: 3rem;
+}
+
+.small_icons {
+  width: 6%;
+}
+
+input {
+  background-color: transparent;
+  border: 0px;
+  font-size: 1rem;
+}
+
+.link_div {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin-top: -7%;
+  margin-bottom: 5%;
+  font-size: 80%;
+  width: 100%;
+}
+
+#login_a1, #signin_a1 {
+  margin-left: 10%;
+  margin-right: 30%;
+}
+#login_a2, #signin_a2 {
+  margin-left: 30%;
+  margin-right: 10%;
+}
+
+
+input {
+  margin-left: -20px;
+  width: 17rem;
+}
+
+input::placeholder {
+  color: white;
+}
+
+input:focus{
+  outline: 2px solid transparent;
+}
+
+button {
+  background-color: transparent;
+  border: 0px;
+  font-size: 2rem;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 20px;
+  transition: all 1s;
+}
+
+button:hover {
+  transform: translateY(-10px);
+  background-color: rgb(88, 90, 134);
+}
