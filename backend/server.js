@@ -7,6 +7,7 @@ app.use(express.static("../frontend"));
 app.use(express.static("../frontend/js"));
 
 app.use(json());
+sss;
 
 app.listen(3000, () => console.log("http://localhost:3000"));
 
