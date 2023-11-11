@@ -5,7 +5,7 @@ import { projectileArray, projectileType } from "../js/projectile.js";
 export let enemyArray = [];
 export let spawnEnemyTime = 333;
 export let enemyType1 = {
-  width: 20,
+  width: 70,
   damage: 1,
   bodySpeed: 1,
   weapons: 2,
@@ -16,7 +16,7 @@ export let enemyType1 = {
   hp: 5,
 };
 export let enemyType2 = {
-  width: 20,
+  width: 70,
   damage: 5,
   bodySpeed: 1,
   weapons: 1,
@@ -27,7 +27,7 @@ export let enemyType2 = {
   hp: 3,
 };
 export let enemyType3 = {
-  width: 20,
+  width: 70,
   damage: 2,
   bodySpeed: 1,
   weapons: 1,
@@ -38,7 +38,7 @@ export let enemyType3 = {
   hp: 5,
 };
 export let enemyType4 = {
-  width: 20,
+  width: 70,
   damage: 3,
   bodySpeed: 1,
   weapons: 1,
@@ -107,7 +107,7 @@ function addEnemy(nrEnemyes, enemyType) {
     X = Math.round(Math.random() * window.innerWidth);
   }
 
-  let values = {
+  enemyArray.push({
     x: X,
     y: Y,
     xm: 0,
@@ -117,22 +117,11 @@ function addEnemy(nrEnemyes, enemyType) {
     damage: enemyType.damage,
     hp: enemyType.hp,
     speed: enemyType.bodySpeed,
-  };
-
-  enemyArray.push({
-    x: values.x,
-    y: values.y,
-    xm: values.xm,
-    ym: values.xm,
-    type: enemyType.type,
-    width: enemyType.width,
-    damage: enemyType.damage,
-    hp: enemyType.hp,
-    speed: enemyType.bodySpeed,
+    lastRotation: 0,
   });
 
   console.log(enemyArray[enemyArray.length - 1]);
-  console.log(values);
+  /* console.log(values); */
 
   if (nrEnemyes > 1)
     setTimeout(() => {
@@ -149,7 +138,7 @@ export function checkColisionCharacter(enemy) {
   if (enemy.ym < 0) pozYm = enemy.ym * -1;
   else pozYm = enemy.ym;
   let max = Math.max(pozXm, pozYm);
-  let imp2 = max / enemyType1.speed;
+  let imp2 = max / enemyType1.bodySpeed;
   if (imp2 < 0) imp2 *= -1;
 
   if (pozXm < 40 && pozYm < 40) {
@@ -184,33 +173,47 @@ export function checkProjectileColosion(enemy) {
 
 export function drawEnemyCircle(enemy, imp2) {
   let type = {};
-  let img;
+  let img, x;
   if (enemy.type == 1) {
     img = enemy1_img;
     type = enemyType1;
+    x = 1.57079633;
   } else if (enemy.type == 2) {
     img = enemy2_img;
     type = enemyType2;
+    x = 3 * 1.57079633;
   } else if (enemy.type == 3) {
     img = enemy3_img;
     type = enemyType3;
+    x = 3 * 1.57079633;
   } else if (enemy.type == 4) {
     img = enemy4_img;
     type = enemyType4;
+    x = 3 * 1.57079633;
   }
 
-  enemy.x += type.speed * (enemy.xm / imp2);
-  enemy.y += type.speed * (enemy.ym / imp2);
+  enemy.x += type.bodySpeed * (enemy.xm / imp2);
+  enemy.y += type.bodySpeed * (enemy.ym / imp2);
   c.beginPath();
-  c.arc(enemy.x, enemy.y, enemy.width, 0, Math.PI * 2, false);
-  c.fillStyle = "red";
-  c.fill();
+  c.arc(enemy.x, enemy.y, type.width / 2, 0, Math.PI * 2, false);
+
+  let newRotation = Math.atan2(character.y - enemy.y, character.x - enemy.x);
 
   c.save();
   c.translate(enemy.x, enemy.y);
-  c.rotate(0);
 
-  c.drawImage(img, -enemy.width / 2, -enemy.height / 2);
+  enemy.lastRotation += newRotation - enemy.lastRotation;
+
+  c.rotate(enemy.lastRotation - x);
+
+  enemy.lastRotation = newRotation;
+  c.drawImage(
+    img,
+    -type.width + type.width / 2,
+    -type.width + type.width / 2,
+    type.width,
+    type.width
+  );
 
   c.restore();
 }
