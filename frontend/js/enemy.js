@@ -118,6 +118,10 @@ function addEnemy(nrEnemyes, enemyType) {
     hp: enemyType.hp,
     speed: enemyType.bodySpeed,
     lastRotation: 0,
+    frame: 0,
+    randomX: Math.random() * enemyType.bodySpeed,
+    randomY: Math.random() * enemyType.bodySpeed,
+    angle: 0,
   });
 
   console.log(enemyArray[enemyArray.length - 1]);
@@ -133,18 +137,22 @@ export function checkColisionCharacter(enemy) {
   let pozXm,
     pozYm,
     addScore = 0;
+  let enemyType = {};
+  if (enemy.type == 1) enemyType = enemyType1;
+  else if (enemy.type == 2) enemyType = enemyType2;
+  else if (enemy.type == 3) enemyType = enemyType3;
+  else if (enemy.type == 4) enemyType = enemyType4;
   if (enemy.xm < 0) pozXm = enemy.xm * -1;
   else pozXm = enemy.xm;
   if (enemy.ym < 0) pozYm = enemy.ym * -1;
   else pozYm = enemy.ym;
   let max = Math.max(pozXm, pozYm);
-  let imp2 = max / enemyType1.bodySpeed;
+  let imp2 = max / enemyType.bodySpeed;
   if (imp2 < 0) imp2 *= -1;
 
   if (pozXm < 40 && pozYm < 40) {
     character.hp -= enemy.damage;
     addScore++;
-    if (character.hp < 1) imp2 = -1;
     enemyArray.splice(enemyArray.indexOf(enemy), 1);
   }
 
@@ -192,8 +200,67 @@ export function drawEnemyCircle(enemy, imp2) {
     x = 3 * 1.57079633;
   }
 
-  enemy.x += type.bodySpeed * (enemy.xm / imp2);
-  enemy.y += type.bodySpeed * (enemy.ym / imp2);
+  if (type.type == 1 || type.type == 3) {
+    if (enemy.frame < 500) {
+      enemy.frame++;
+      enemy.x += type.bodySpeed * (enemy.xm / imp2);
+      enemy.y += type.bodySpeed * (enemy.ym / imp2);
+    } else {
+      enemy.x += enemy.randomX;
+      enemy.y += enemy.randomY;
+    }
+
+    if (enemy.x > window.innerWidth - 24) {
+      enemy.x = window.innerWidth - 24;
+      enemy.randomX *= -1;
+      enemy.randomY *= -1;
+    } else if (enemy.x < 20) {
+      enemy.x = 20;
+      enemy.randomX *= -1;
+      enemy.randomY *= -1;
+    }
+    if (enemy.y > window.innerHeight - 24) {
+      enemy.y = window.innerHeight - 24;
+      enemy.randomX *= -1;
+      enemy.randomY *= -1;
+    } else if (enemy.y < 20) {
+      enemy.y = 20;
+      enemy.randomX *= -1;
+      enemy.randomY *= -1;
+    }
+  } else if (type.type == 2) {
+    if (enemy.frame < 250) {
+      enemy.frame++;
+      enemy.x += type.bodySpeed * (enemy.xm / imp2);
+      enemy.y += type.bodySpeed * (enemy.ym / imp2);
+    } else {
+      enemy.x += enemy.randomX;
+      enemy.y += enemy.randomY;
+    }
+
+    if (enemy.x > window.innerWidth - 24) {
+      enemy.x = window.innerWidth - 24;
+      enemy.randomX *= -1;
+      enemy.randomY *= -1;
+    } else if (enemy.x < 20) {
+      enemy.x = 20;
+      enemy.randomX *= -1;
+      enemy.randomY *= -1;
+    }
+    if (enemy.y > window.innerHeight - 24) {
+      enemy.y = window.innerHeight - 24;
+      enemy.randomX *= -1;
+      enemy.randomY *= -1;
+    } else if (enemy.y < 20) {
+      enemy.y = 20;
+      enemy.randomX *= -1;
+      enemy.randomY *= -1;
+    }
+  } else if (type.type == 4) {
+    enemy.x += type.bodySpeed * (enemy.xm / imp2);
+    enemy.y += type.bodySpeed * (enemy.ym / imp2);
+  }
+
   c.beginPath();
   c.arc(enemy.x, enemy.y, type.width / 2, 0, Math.PI * 2, false);
 
@@ -205,6 +272,7 @@ export function drawEnemyCircle(enemy, imp2) {
   enemy.lastRotation += newRotation - enemy.lastRotation;
 
   c.rotate(enemy.lastRotation - x);
+  enemy.angle = enemy.lastRotation - x;
 
   enemy.lastRotation = newRotation;
   c.drawImage(
@@ -216,4 +284,46 @@ export function drawEnemyCircle(enemy, imp2) {
   );
 
   c.restore();
+
+  return type;
+}
+
+export let enemyBulletArray = [];
+
+export function addEnemyBullet(enemy, enemyType) {
+  enemyBulletArray.push({
+    x: enemy.x,
+    y: enemy.y,
+    width: enemyType.bulletWidth,
+    xm: character.x - enemy.x,
+    ym: character.y - enemy.y,
+    damage: enemyType.damage,
+    angle:
+      Math.atan2(character.y - enemy.y, character.x - enemy.x) *
+      (180 / Math.PI),
+  });
+}
+
+export function animateEnemyBullets(projectile, enemyType, enemy, imp) {
+  projectile.x += projectileType.speed * (projectile.xm / imp);
+  projectile.y += projectileType.speed * (projectile.ym / imp);
+  c.save();
+  c.translate(projectile.x, projectile.y);
+  c.rotate(enemy.angle);
+
+  c.drawImage(bullet_img, -bullet_img.width / 2, -bullet_img.height / 2);
+
+  c.restore();
+}
+
+export function checkEnemyBulletCharacterColision(projectile, enemyType) {
+  let diffX = projectile.y - character.y,
+    diffY = projectile.x - character.x;
+  if (diffX < 0) diffX *= -1;
+  if (diffY < 0) diffY *= -1;
+
+  if (diffX < character.width / 2 || diffY < character.width / 2) {
+    enemyBulletArray.splice(enemyBulletArray.indexOf(projectile), 1);
+    character.hp -= enemyType.damage;
+  }
 }

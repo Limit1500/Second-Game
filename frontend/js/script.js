@@ -30,17 +30,21 @@ import {
 } from "../js/projectile.js";
 import {
   enemyArray,
-  enemyType1,
   spawnEnemyTime,
   addWaves,
   checkColisionCharacter,
   drawEnemyCircle,
   checkProjectileColosion,
+  addEnemyBullet,
+  checkEnemyBulletCharacterColision,
+  animateEnemyBullets,
+  enemyBulletArray,
 } from "../js/enemy.js";
 
 let gameOver,
   wave = 0;
 export let score = 0;
+
 function animate() {
   if (gameOver == 1) {
     window.location.href = "../tryAgain.html";
@@ -77,7 +81,16 @@ function animate() {
     if (imp2 == -1) gameOver = 1;
     score += checkProjectileColosion(enemy);
     localStorage.setItem("score", score);
-    drawEnemyCircle(enemy, imp2);
+    let enemyType = drawEnemyCircle(enemy, imp2);
+    /*
+    if (enemy.frame % (50 * enemyType.bulletSpeed) == 0) {
+      enemy.frame = 0;
+      addEnemyBullet(enemy, enemyType);
+    }
+    enemyBulletArray.forEach((projectile) => {
+      checkEnemyBulletCharacterColision(enemy, enemyType);
+      animateEnemyBullets(projectile, enemyType, enemy, imp2);
+    }); */
   });
 }
 
