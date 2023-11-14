@@ -1,5 +1,6 @@
 const characterDamage = new Audio("../audios/characredDamage.mp3");
 const enemyShoot = new Audio("../audios/enemyShoot.mp3");
+const enemyDestroyed = new Audio("../audios/enemyDestroyed.mp3");
 
 import { character } from "../js/character.js";
 import {
@@ -175,6 +176,7 @@ export function checkProjectileColosion(enemy) {
     if (xDif < 40 && yDif < 40) {
       enemy.hp -= projectileType.damage;
       if (enemy.hp < 1) {
+        enemyDestroyed.play();
         enemyArray.splice(enemyArray.indexOf(enemy), 1);
         addScore++;
       }
