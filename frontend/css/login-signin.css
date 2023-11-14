@@ -68,10 +68,12 @@ input {
 #login_a1, #signin_a1 {
   margin-left: 10%;
   margin-right: 30%;
+  margin-top: 15px;
 }
 #login_a2, #signin_a2 {
   margin-left: 30%;
   margin-right: 10%;
+  margin-top: 15px;
 }
 
 

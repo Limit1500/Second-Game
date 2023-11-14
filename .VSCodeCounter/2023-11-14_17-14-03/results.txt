@@ -1,0 +1,48 @@
+Date : 2023-11-14 17:14:03
+Directory : g:\DOCUMENTS\node.js projects\Second-Game\frontend
+Total : 19 files,  987 codes, 3 comments, 104 blanks, all 1094 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| JavaScript |          8 |        673 |          3 |         66 |        742 |
+| CSS        |          4 |        192 |          0 |         33 |        225 |
+| HTML       |          7 |        122 |          0 |          5 |        127 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++-------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                    | files      | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                       |         19 |        987 |          3 |        104 |      1,094 |
+| . (Files)                                                               |          7 |        122 |          0 |          5 |        127 |
+| css                                                                     |          4 |        192 |          0 |         33 |        225 |
+| js                                                                      |          8 |        673 |          3 |         66 |        742 |
++-------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                | language   | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| g:\DOCUMENTS\node.js projects\Second-Game\frontend\account.html         | HTML       |          0 |          0 |          1 |          1 |
+| g:\DOCUMENTS\node.js projects\Second-Game\frontend\css\game.css         | CSS        |         22 |          0 |          3 |         25 |
+| g:\DOCUMENTS\node.js projects\Second-Game\frontend\css\login-signin.css | CSS        |         89 |          0 |         15 |        104 |
+| g:\DOCUMENTS\node.js projects\Second-Game\frontend\css\start.css        | CSS        |         42 |          0 |          8 |         50 |
+| g:\DOCUMENTS\node.js projects\Second-Game\frontend\css\tryAgain.css     | CSS        |         39 |          0 |          7 |         46 |
+| g:\DOCUMENTS\node.js projects\Second-Game\frontend\game.html            | HTML       |         21 |          0 |          2 |         23 |
+| g:\DOCUMENTS\node.js projects\Second-Game\frontend\index.html           | HTML       |         22 |          0 |          0 |         22 |
+| g:\DOCUMENTS\node.js projects\Second-Game\frontend\js\character.js      | JavaScript |        129 |          0 |          9 |        138 |
+| g:\DOCUMENTS\node.js projects\Second-Game\frontend\js\enemy.js          | JavaScript |        308 |          0 |         30 |        338 |
+| g:\DOCUMENTS\node.js projects\Second-Game\frontend\js\login.js          | JavaScript |         30 |          0 |          3 |         33 |
+| g:\DOCUMENTS\node.js projects\Second-Game\frontend\js\projectile.js     | JavaScript |         57 |          1 |          7 |         65 |
+| g:\DOCUMENTS\node.js projects\Second-Game\frontend\js\script.js         | JavaScript |         84 |          2 |         12 |         98 |
+| g:\DOCUMENTS\node.js projects\Second-Game\frontend\js\signin.js         | JavaScript |         30 |          0 |          2 |         32 |
+| g:\DOCUMENTS\node.js projects\Second-Game\frontend\js\start.js          | JavaScript |          8 |          0 |          1 |          9 |
+| g:\DOCUMENTS\node.js projects\Second-Game\frontend\js\tryAgain.js       | JavaScript |         27 |          0 |          2 |         29 |
+| g:\DOCUMENTS\node.js projects\Second-Game\frontend\leaderboard.html     | HTML       |          0 |          0 |          1 |          1 |
+| g:\DOCUMENTS\node.js projects\Second-Game\frontend\login.html           | HTML       |         30 |          0 |          0 |         30 |
+| g:\DOCUMENTS\node.js projects\Second-Game\frontend\singnin.html         | HTML       |         30 |          0 |          0 |         30 |
+| g:\DOCUMENTS\node.js projects\Second-Game\frontend\tryAgain.html        | HTML       |         19 |          0 |          1 |         20 |
+| Total                                                                   |            |        987 |          3 |        104 |      1,094 |
++-------------------------------------------------------------------------+------------+------------+------------+------------+------------+

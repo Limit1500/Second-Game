@@ -86,9 +86,9 @@ function animate() {
     if (enemy.frame % (50 * enemyType.bulletSpeed) == 0) {
       addEnemyBullet(enemy, enemyType);
     }
-
     enemyBulletArray.forEach((projectile) => {
       animateEnemyBullets(projectile, enemyType, enemy, imp2);
+      checkEnemyBulletCharacterColision(projectile, enemyType);
     });
   });
 }

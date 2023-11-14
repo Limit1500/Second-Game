@@ -9,9 +9,9 @@ export let enemyType1 = {
   damage: 1,
   bodySpeed: 1,
   weapons: 2,
-  fireRate: 333,
-  bulletSpeed: 2,
-  bulletWidth: 10,
+  fireRate: 333, // nu face nimic
+  bulletSpeed: 1, // aparent este fire rate
+  bulletWidth: 10, // e bun
   type: 1,
   hp: 5,
 };
@@ -330,7 +330,7 @@ export function checkEnemyBulletCharacterColision(projectile, enemyType) {
   if (diffX < 0) diffX *= -1;
   if (diffY < 0) diffY *= -1;
 
-  if (diffX < character.width / 2 || diffY < character.width / 2) {
+  if (diffX < character.width / 5 && diffY < character.width / 5) {
     enemyBulletArray.splice(enemyBulletArray.indexOf(projectile), 1);
     character.hp -= enemyType.damage;
   }
