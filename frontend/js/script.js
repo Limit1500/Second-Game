@@ -1,3 +1,15 @@
+// AUDIOS
+const gameMusic = new Audio("../audios/game-music-loop-7-145285.mp3");
+const gameOverAudio = new Audio("../audios/loseEfect.mp3");
+gameMusic.loop = true;
+window.addEventListener("load", () => {
+  gameMusic.play();
+});
+gameMusic.addEventListener("timeupdate", () => {
+  if (gameMusic.currentTime >= gameMusic.duration - 3) {
+    gameMusic.currentTime = 0;
+  }
+});
 // IMAGES
 export let character_img = document.querySelector("#character_img");
 export let bullet_img = document.querySelector("#bullet_img");
@@ -5,6 +17,9 @@ export let enemy1_img = document.querySelector("#enemy1_img");
 export let enemy2_img = document.querySelector("#enemy2_img");
 export let enemy3_img = document.querySelector("#enemy3_img");
 export let enemy4_img = document.querySelector("#enemy4_img");
+export let bila_img = document.querySelector("#bila_img");
+export let focmic_img = document.querySelector("#focmic_img");
+export let focmare_img = document.querySelector("#focmare_img");
 // CANVAS
 export let canvas = document.querySelector("canvas");
 export let c = canvas.getContext("2d");
@@ -47,6 +62,7 @@ export let score = 0;
 
 function animate() {
   if (gameOver == 1) {
+    gameOverAudio.play();
     window.location.href = "../tryAgain.html";
     c.clearRect(0, 0, canvas.width, canvas.height);
     return 0;

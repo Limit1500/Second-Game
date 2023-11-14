@@ -1,7 +1,15 @@
-import { character } from "../js/character.js";
-import { c } from "../js/script.js";
-import { projectileArray, projectileType } from "../js/projectile.js";
+const characterDamage = new Audio("../audios/characredDamage.mp3");
+const enemyShoot = new Audio("../audios/enemyShoot.mp3");
 
+import { character } from "../js/character.js";
+import {
+  bila_img,
+  bullet_img,
+  c,
+  focmare_img,
+  focmic_img,
+} from "../js/script.js";
+import { projectileArray, projectileType } from "../js/projectile.js";
 export let enemyArray = [];
 export let spawnEnemyTime = 333;
 export let enemyType1 = {
@@ -22,7 +30,7 @@ export let enemyType2 = {
   weapons: 1,
   fireRate: 1000,
   bulletSpeed: 4,
-  bulletWidth: 10,
+  bulletWidth: 15,
   type: 2,
   hp: 3,
 };
@@ -293,7 +301,7 @@ export let enemyBulletArray = [];
 export function addEnemyBullet(enemy, enemyType) {
   let xm = character.x - enemy.x;
   let ym = character.y - enemy.y;
-
+  enemyShoot.play();
   let imp = Math.sqrt(xm * xm + ym * ym);
 
   enemyBulletArray.push({
@@ -314,8 +322,12 @@ export function animateEnemyBullets(projectile, enemyType, enemy, imp) {
   c.save();
   c.translate(projectile.x, projectile.y);
   c.rotate(projectile.angle);
+  let img;
+  if (enemyType.type == 1 || enemyType.type == 3) img = focmic_img;
+  else if (enemyType.type == 2) img = focmare_img;
+  else img = bila_img;
   c.drawImage(
-    bullet_img,
+    img,
     -projectile.width / 2,
     -projectile.width / 2,
     projectile.width * 1.2,
@@ -331,6 +343,7 @@ export function checkEnemyBulletCharacterColision(projectile, enemyType) {
   if (diffY < 0) diffY *= -1;
 
   if (diffX < character.width / 5 && diffY < character.width / 5) {
+    characterDamage.play();
     enemyBulletArray.splice(enemyBulletArray.indexOf(projectile), 1);
     character.hp -= enemyType.damage;
   }
