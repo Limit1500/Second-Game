@@ -124,9 +124,6 @@ function addEnemy(nrEnemyes, enemyType) {
     angle: 0,
   });
 
-  console.log(enemyArray[enemyArray.length - 1]);
-  /* console.log(values); */
-
   if (nrEnemyes > 1)
     setTimeout(() => {
       addEnemy(nrEnemyes - 1, enemyType);
@@ -206,6 +203,7 @@ export function drawEnemyCircle(enemy, imp2) {
       enemy.x += type.bodySpeed * (enemy.xm / imp2);
       enemy.y += type.bodySpeed * (enemy.ym / imp2);
     } else {
+      enemy.frame++;
       enemy.x += enemy.randomX;
       enemy.y += enemy.randomY;
     }
@@ -234,6 +232,7 @@ export function drawEnemyCircle(enemy, imp2) {
       enemy.x += type.bodySpeed * (enemy.xm / imp2);
       enemy.y += type.bodySpeed * (enemy.ym / imp2);
     } else {
+      enemy.frame++;
       enemy.x += enemy.randomX;
       enemy.y += enemy.randomY;
     }
@@ -257,6 +256,7 @@ export function drawEnemyCircle(enemy, imp2) {
       enemy.randomY *= -1;
     }
   } else if (type.type == 4) {
+    enemy.frame++;
     enemy.x += type.bodySpeed * (enemy.xm / imp2);
     enemy.y += type.bodySpeed * (enemy.ym / imp2);
   }
@@ -291,28 +291,36 @@ export function drawEnemyCircle(enemy, imp2) {
 export let enemyBulletArray = [];
 
 export function addEnemyBullet(enemy, enemyType) {
+  let xm = character.x - enemy.x;
+  let ym = character.y - enemy.y;
+
+  let imp = Math.sqrt(xm * xm + ym * ym);
+
   enemyBulletArray.push({
     x: enemy.x,
     y: enemy.y,
     width: enemyType.bulletWidth,
-    xm: character.x - enemy.x,
-    ym: character.y - enemy.y,
+    xm: xm / imp,
+    ym: ym / imp,
     damage: enemyType.damage,
-    angle:
-      Math.atan2(character.y - enemy.y, character.x - enemy.x) *
-      (180 / Math.PI),
+    angle: Math.atan2(ym, xm) + Math.PI / 2,
   });
 }
 
 export function animateEnemyBullets(projectile, enemyType, enemy, imp) {
-  projectile.x += projectileType.speed * (projectile.xm / imp);
-  projectile.y += projectileType.speed * (projectile.ym / imp);
+  projectile.x += enemyType.bulletSpeed * projectile.xm;
+  projectile.y += enemyType.bulletSpeed * projectile.ym;
+
   c.save();
   c.translate(projectile.x, projectile.y);
-  c.rotate(enemy.angle);
-
-  c.drawImage(bullet_img, -bullet_img.width / 2, -bullet_img.height / 2);
-
+  c.rotate(projectile.angle);
+  c.drawImage(
+    bullet_img,
+    -projectile.width / 2,
+    -projectile.width / 2,
+    projectile.width * 1.2,
+    projectile.width * 1.5
+  );
   c.restore();
 }
 

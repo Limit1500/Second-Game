@@ -82,15 +82,14 @@ function animate() {
     score += checkProjectileColosion(enemy);
     localStorage.setItem("score", score);
     let enemyType = drawEnemyCircle(enemy, imp2);
-    /*
+
     if (enemy.frame % (50 * enemyType.bulletSpeed) == 0) {
-      enemy.frame = 0;
       addEnemyBullet(enemy, enemyType);
     }
+
     enemyBulletArray.forEach((projectile) => {
-      checkEnemyBulletCharacterColision(enemy, enemyType);
       animateEnemyBullets(projectile, enemyType, enemy, imp2);
-    }); */
+    });
   });
 }
 
