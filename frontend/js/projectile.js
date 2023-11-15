@@ -1,4 +1,5 @@
 const characterShoot = new Audio("../audios/characterShoot.mp3");
+characterShoot.playbackRate += 1;
 
 import { character } from "../js/character.js";
 import { c, canvas, bullet_img } from "../js/script.js";
@@ -15,8 +16,10 @@ window.addEventListener("mousemove", (event) => {
   mouseY = event.y;
 });
 window.addEventListener("click", () => {
-  characterShoot.pause();
   characterShoot.play();
+  setTimeout(function () {
+    characterShoot.currentTime = 0;
+  }, 500);
   projectileArray.push({
     x: character.x,
     y: character.y,

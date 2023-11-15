@@ -1,6 +1,6 @@
-const characterDamage = new Audio("../audios/characredDamage.mp3");
-const enemyShoot = new Audio("../audios/enemyShoot.mp3");
+const characterDamage = new Audio("../audios/enemyShoot.mp3");
 const enemyDestroyed = new Audio("../audios/enemyDestroyed.mp3");
+characterDamage.playbackRate += 2;
 
 import { character } from "../js/character.js";
 import {
@@ -303,7 +303,6 @@ export let enemyBulletArray = [];
 export function addEnemyBullet(enemy, enemyType) {
   let xm = character.x - enemy.x;
   let ym = character.y - enemy.y;
-  enemyShoot.play();
   let imp = Math.sqrt(xm * xm + ym * ym);
 
   enemyBulletArray.push({
@@ -346,6 +345,9 @@ export function checkEnemyBulletCharacterColision(projectile, enemyType) {
 
   if (diffX < character.width / 5 && diffY < character.width / 5) {
     characterDamage.play();
+    setTimeout(function () {
+      characterDamage.currentTime = 0;
+    }, 500);
     enemyBulletArray.splice(enemyBulletArray.indexOf(projectile), 1);
     character.hp -= enemyType.damage;
   }
