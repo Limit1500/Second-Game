@@ -19,7 +19,7 @@ export let enemyType1 = {
   bodySpeed: 1,
   weapons: 2,
   fireRate: 333, // nu face nimic
-  bulletSpeed: 1, // aparent este fire rate
+  bulletSpeed: 2, // aparent este fire rate
   bulletWidth: 10, // e bun
   type: 1,
   hp: 5,
@@ -30,7 +30,7 @@ export let enemyType2 = {
   bodySpeed: 1,
   weapons: 1,
   fireRate: 1000,
-  bulletSpeed: 4,
+  bulletSpeed: 8,
   bulletWidth: 15,
   type: 2,
   hp: 3,
@@ -41,7 +41,7 @@ export let enemyType3 = {
   bodySpeed: 1,
   weapons: 1,
   fireRate: 333,
-  bulletSpeed: 2,
+  bulletSpeed: 4,
   bulletWidth: 10,
   type: 3,
   hp: 5,
@@ -52,7 +52,7 @@ export let enemyType4 = {
   bodySpeed: 1,
   weapons: 1,
   fireRate: 500,
-  bulletSpeed: 1,
+  bulletSpeed: 2,
   bulletWidth: 20,
   type: 4,
   hp: 7,
@@ -64,11 +64,11 @@ let spawnEnemy1 = 0,
   spawnEnemy4 = 0;
 export function addWaves(wave) {
   let totEnemy = -1;
-  if (wave % 10 == 1 || wave % 10 == 2 || wave % 10 == 3) {
+  if (wave % 10 == 1 || wave % 10 == 2) {
     spawnEnemy1++;
     spawnEnemy3++;
-  } else if (wave % 10 == 4 || wave % 10 == 6) spawnEnemy2 += 2;
-  else if (wave % 10 == 5 || wave % 10 == 7) spawnEnemy4 += 2;
+  } else if (wave % 10 == 4) spawnEnemy2 += 2;
+  else if (wave % 10 == 7) spawnEnemy4 += 2;
   else if (wave % 10 == 8) {
     totEnemy = 0;
     totEnemy += spawnEnemy1;
@@ -317,8 +317,8 @@ export function addEnemyBullet(enemy, enemyType) {
 }
 
 export function animateEnemyBullets(projectile, enemyType, enemy, imp) {
-  projectile.x += enemyType.bulletSpeed * projectile.xm;
-  projectile.y += enemyType.bulletSpeed * projectile.ym;
+  projectile.x += (2 * projectile.xm) / enemyArray.length;
+  projectile.y += (2 * projectile.ym) / enemyArray.length;
 
   c.save();
   c.translate(projectile.x, projectile.y);
@@ -345,6 +345,8 @@ export function checkEnemyBulletCharacterColision(projectile, enemyType) {
 
   if (diffX < character.width / 5 && diffY < character.width / 5) {
     characterDamage.play();
+    character.hp -= enemyType.damage;
+    if (character.hp < 1) return 1;
     setTimeout(function () {
       characterDamage.currentTime = 0;
     }, 500);

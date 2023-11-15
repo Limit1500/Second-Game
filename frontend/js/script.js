@@ -104,7 +104,8 @@ function animate() {
     }
     enemyBulletArray.forEach((projectile) => {
       animateEnemyBullets(projectile, enemyType, enemy, imp2);
-      checkEnemyBulletCharacterColision(projectile, enemyType);
+      if (checkEnemyBulletCharacterColision(projectile, enemyType) == 1)
+        gameOver = 1;
     });
   });
 }
