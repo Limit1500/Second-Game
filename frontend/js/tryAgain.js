@@ -5,7 +5,7 @@ const highScore = localStorage.getItem("highScore");
 let score_p = document.querySelector("#score_p");
 score_p.textContent = `Score: ${score}`;
 
-if (score > highScore && username != undefined) {
+if (score > highScore && username != -1) {
   fetch(`/users-addNewHighScore`, {
     method: "POST",
     headers: {

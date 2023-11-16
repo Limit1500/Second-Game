@@ -7,7 +7,6 @@ let welcome_back = document.querySelector("#welcome_back");
 let username = -1,
   password,
   highScore;
-
 login_button.addEventListener("click", () => {
   fetch(`/users/${login_username.value}/${login_password.value}`)
     .then((response) => {
