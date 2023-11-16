@@ -20,6 +20,8 @@ export let enemy4_img = document.querySelector("#enemy4_img");
 export let bila_img = document.querySelector("#bila_img");
 export let focmic_img = document.querySelector("#focmic_img");
 export let focmare_img = document.querySelector("#focmare_img");
+export let fullHeart_img = document.querySelector("#fullHeart_img");
+export let emptyHeart_img = document.querySelector("emptyHeart_img");
 // CANVAS
 export let canvas = document.querySelector("canvas");
 export let c = canvas.getContext("2d");
@@ -78,6 +80,10 @@ function animate() {
   c.fillStyle = "white";
   c.fillText("SCORE:", 20, 50);
   c.fillText(score, 140, 50);
+
+  let hearts = Math.round(character.hp / 2);
+  for (let i = 250; i <= hearts * 40 + 250; i += 40)
+    c.drawImage(fullHeart_img, i, 30, 30, 30);
 
   projectileArray.forEach((projectile) => {
     checkCharacterColision(projectile);
