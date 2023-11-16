@@ -81,6 +81,11 @@ function animate() {
   c.fillText("SCORE:", 20, 50);
   c.fillText(score, 140, 50);
 
+  c.font = "30px Roboto";
+  c.fillStyle = "white";
+  c.fillText("WAVE:", 300, 50);
+  c.fillText(wave, 400, 50);
+
   let i;
   let hearts = Math.round(character.hp / 2);
   console.log(hearts + " " + character.hp);
