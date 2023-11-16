@@ -157,9 +157,7 @@ export function checkColisionCharacter(enemy) {
   if (imp2 < 0) imp2 *= -1;
 
   if (pozXm < 40 && pozYm < 40) {
-    console.log(character.hp + " -" + enemy.damage);
     character.hp -= enemy.damage;
-    console.log(character.hp);
     addScore++;
     enemyArray.splice(enemyArray.indexOf(enemy), 1);
   }
